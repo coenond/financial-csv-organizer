@@ -1,14 +1,20 @@
 import csv
 
 
+def get_file_name():
+    name = raw_input("Type the name of the csv file: ") + ".csv"
+    name = './input/' + name
+    check_if_file_exists(name)
+    return name
+
+
 def check_if_file_exists(full_filename):
     try:
-        f = open(full_filename)
-        f.close()
-        return True
+        open(full_filename)
+        return
     except IOError:
-        print("File not accessible")
-        check_if_file_exists()
+        print(full_filename + ' not accessible.')
+        get_file_name()
 
 
 def read_file(full_filename):
@@ -17,8 +23,6 @@ def read_file(full_filename):
 
 
 # Get filename
-filename = raw_input("Type the name of the csv file: ") + ".csv"
-filename = '/files/' + filename
+filename = get_file_name()
 
-check_if_file_exists(filename)
 data = read_file(filename)
